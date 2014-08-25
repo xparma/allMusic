@@ -27,7 +27,7 @@
 						<i class="glyphicon glyphicon-user"></i>
 						<g:message code="error.button.Login"/>
 					</a>					
-				</div>
+</div>
 			</div>
 		</div>
 	</section>

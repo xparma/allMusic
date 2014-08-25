@@ -122,3 +122,9 @@ log4j = {
 
 
 grails.databinding.dateFormats = ['dd/MM/yyyy','dd/MM/yyyy hh:mm:ss a']
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.allmusic.auth.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.allmusic.auth.UserRole'
+grails.plugins.springsecurity.authority.className = 'com.allmusic.auth.Role'
+grails.plugins.springsecurity.requestMap.className = 'com.allmusic.auth.Recursos'
+grails.plugins.springsecurity.securityConfigType = (grails.plugins.springsecurity.SecurityConfigType.Requestmap)

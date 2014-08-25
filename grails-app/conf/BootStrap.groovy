@@ -1,7 +1,10 @@
 import com.allmusic.*
+import com.allmusic.auth.*
 
 class BootStrap {
 
+    
+    def springSecurityService
     def init = { servletContext ->
 //        def artist = new Artist(name:'Metallica')
 //        def album = artist.addToAlbums(new Album(name:'Black Album'))
@@ -9,7 +12,22 @@ class BootStrap {
 
 //        def artist = new Artist(name:'Metallica').addToAlbums(new Album(name:'Black Album').addToSongs(name:'Enter Sadman')).save()
 
+        def userRole = new Role(authority: 'ROLE_USER').save()
+            userRole = new Role(authority: 'ROLE_ADMIN').save()
+
+        def user = new User(username: 'admin', fullname: 'administrador', password: 'admin', enabled: true).save(failOnError: true)
+            UserRole.create user, userRole, true
+            
+        def recurso = new Recursos (url:'/favorites/**',configAttribute:'ROLE_USER,ROLE_ADMIN').save()
         
+        for (String url in [
+            '/**/create',
+            '/**/save','/**/save.*',
+            '/**/edit',
+            '/**/update','/**/update.*']) {
+            recurso = new Recursos (url:url,configAttribute:'ROLE_ADMIN').save()
+        }
+            springSecurityService.clearCachedRequestmaps()
         def person = new Person(firstName:'Marcel', lastName:'Parma', address:'Los Caobos', email:'xparma@gmail.com', dateBirth:'23/09/1977', sex:'M')
             person.save(failOnError:true)
             
